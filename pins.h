@@ -17,12 +17,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-int timerOnTogglePin  = 14; // Analog 0
-int longTimeTogglePin = 17; // Analog 3
-int buzzerOnTogglePin = 19; // Analog 5
+#define timerOnTogglePin    14 // Analog 0
+#define timeIsLongTogglePin 17 // Analog 3
+#define buzzerOnTogglePin   19 // Analog 5
 
-int timerOnLedPin  =   5;
-int timeIsLongLedPin = 9;
-int buzzerOnLedPin =   11;
+#define timerOnLedPin    5
+#define timeIsLongLedPin 9
+#define buzzerOnLedPin   11
 
-int alarmBuzzerPin = 2;
+#define alarmBuzzerPin    2
