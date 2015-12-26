@@ -38,6 +38,11 @@ void IndicatorPanel::timerOff()
     digitalWrite(timerOnLedPin, LOW);
 }
 
+void IndicatorPanel::timerDim(int dimness)
+{
+    analogWrite(timerOnLedPin, dimness);
+}
+
 void IndicatorPanel::timeIsLong()
 {
     digitalWrite(timeIsLongLedPin, HIGH);
@@ -48,6 +53,11 @@ void IndicatorPanel::timeIsShort()
     digitalWrite(timeIsLongLedPin, LOW);
 }
 
+void IndicatorPanel::longShortDim(int dimness)
+{
+    analogWrite(timeIsLongLedPin, dimness);
+}
+
 void IndicatorPanel::buzzerOn()
 {
     digitalWrite(buzzerOnLedPin, HIGH);
@@ -56,6 +66,11 @@ void IndicatorPanel::buzzerOn()
 void IndicatorPanel::buzzerOff()
 {
     digitalWrite(buzzerOnLedPin, LOW);
+}
+
+void IndicatorPanel::buzzerDim(int dimness)
+{
+    analogWrite(buzzerOnLedPin, dimness);
 }
 
 void IndicatorPanel::allOn()
@@ -70,4 +85,11 @@ void IndicatorPanel::allOff()
     timerOff();
     timeIsShort();
     buzzerOff();
+}
+
+void IndicatorPanel::allDim(int dimness)
+{
+    timerDim(dimness);
+    longShortDim(dimness);
+    buzzerDim(dimness); 
 }

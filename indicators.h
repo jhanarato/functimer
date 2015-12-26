@@ -30,10 +30,17 @@ public:
     
     void timerOn();
     void timerOff();
+    void timerDim(int dimness);
+
     void timeIsLong();
     void timeIsShort();
+    void longShortDim(int dimness);
+        
     void buzzerOn();
     void buzzerOff();
+    void buzzerDim(int dimness);
+    
     void allOn();
     void allOff();
+    void allDim(int dimness);
 };
