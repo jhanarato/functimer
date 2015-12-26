@@ -28,6 +28,7 @@ Fader::Fader()
     increment = 5;
     maximum = 255;
     minimum = 0;
+    level = minimum;
 }
 
 void Fader::fadeIn()
