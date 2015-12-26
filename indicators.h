@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /* 
-    The driver for the panel of three LEDs indicating the following:
-        - The timer is on (counting down) or off.
-        - The length of time is long or short.
-        - The buzzer will sound when the time is complete.
+The driver for the panel of three LEDs indicating the following:
+    - The timer is on (counting down) or off.
+    - The length of time is long or short.
+    - The buzzer will sound when the time is complete.
 */
 class IndicatorPanel
 { 
