@@ -33,6 +33,7 @@ class Timer
 public:
     Timer();
     void setDuration(int duration);
+    bool isStarted();
     bool isComplete();
     void start();
     void update();

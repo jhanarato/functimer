@@ -34,6 +34,11 @@ void Timer::setDuration(int duration)
     this->duration = duration;
 }
 
+bool Timer::isStarted()
+{
+    return started;
+}
+
 bool Timer::isComplete()
 {
     return complete;
