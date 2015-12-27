@@ -29,6 +29,7 @@ Fader::Fader()
     maximum = 255;
     minimum = 0;
     level = minimum;
+    isFadingIn = true;
 }
 
 void Fader::fadeIn()
@@ -43,6 +44,22 @@ void Fader::fadeOut()
     if(level < minimum) setMinimum(); 
 }
 
+void Fader::fadeInAndOut()
+{
+    if(isMaximum()) isFadingIn = false;
+    if(isMinimum()) isFadingIn = true;
+    
+    if(isFadingIn) 
+        fadeIn();
+    else
+        fadeOut();
+}
+
+bool Fader::cycleComplete()
+{
+    return !isFadingIn && isMinimum();
+}
+
 void Fader::setMaximum()
 {
     level = maximum;
@@ -51,6 +68,12 @@ void Fader::setMaximum()
 void Fader::setMinimum()
 {
     level = minimum;
+}
+
+void Fader::reset()
+{
+    setMinimum();
+    isFadingIn = true;
 }
 
 bool Fader::isMaximum()

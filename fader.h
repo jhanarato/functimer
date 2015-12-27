@@ -25,18 +25,23 @@ class Fader
     int minimum;
     int maximum;
     int level;
+    bool isFadingIn;
     
 public:
     Fader();
 
     void fadeIn();
     void fadeOut();
+    void fadeInAndOut();
     
     void setMaximum();
     void setMinimum();
     
+    void reset();
+    
     bool isMaximum();
     bool isMinimum();
+    bool cycleComplete();
     
     int getLevel();
 };
