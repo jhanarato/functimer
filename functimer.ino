@@ -28,13 +28,20 @@ SwitchPanel switches;
 Buzzer buzzer = Buzzer(300);
 Fader fader;
 
+Timer testTimer;
+bool ledOn;
+
 void setup()
 {
     fader.setMinimum();
+    testTimer.setDuration(1000); // Do something every second.
+    testTimer.start();
+    ledOn = true; // Start with light on.
 }
 
-void loop()
-{    
+// This runs when the session is complete.
+void finishEffect()
+{
     while(!fader.cycleComplete())
     {
         fader.fadeInAndOut();
@@ -64,6 +71,24 @@ void loop()
     }
     
     fader.reset();
+}
+
+void loop()
+{
+    testTimer.update();
+    if(testTimer.isComplete())
+    {
+        if(ledOn)
+        {
+            indicators.allOn();
+        }
+        else
+        {
+            indicators.allOff();
+        }
+        ledOn = !ledOn;
+        testTimer.start();
+    }
 }
 
 
