@@ -17,25 +17,51 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* 
-    The main point of this class is to encapsulate the timing
-    of events in the main loop, using the millis() arduino function
-    rather than delay().
-*/
-
+// Timer class:
+// Implemented to allow for multiple timers to run concurrently. 
+// Several timer objects can exist at once, keeping track of time
+// without blocking the execution of other parts of the code. This
+// overcomes the problem with using delay() to make code like blinking
+// or fading LEDs work. It does, however, introduce a certain amount
+// of complexity in the name of Doing Things Right.
 class Timer
 {
+    // The time in millis when the timer begun.
     int startTime;
+    
+    // The time we are waiting in millis.
     int duration;
+    
+    // The timer has begun.
     bool started;
+    
+    // The duration of time set has passed.
     bool complete;
     
 public:
+    // Create a new timer - neither started nor complete.
     Timer();
+    
+    // Set the time in millis between the 
+    // start and finish of the timer. This can be called
+    // at any time after object instatiation.
     void setDuration(int duration);
+    
+    // Returns true if the timer has started
+    // but is not complete.
     bool isStarted();
+    
+    // Returns true if the timer has started
+    // and the time has elapsed. Will return false when
+    // the timer is restarted.
     bool isComplete();
+    
+    // Start the timer.
     void start();
+    
+    // Check to see if the set time has elapsed.
+    // If so, isComplete() returns true until
+    // the timer is restarted.
     void update();
 };
 
