@@ -17,27 +17,32 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* 
-The driver for the panel of toggle switches. We can:
-    - Turn the timer on and off.
-    - Choose between long and short meditation sessions.
-    - Set the piezo buzzer to beep when the session ends.
-    
-NOTE: I'm not sure if I can get this to work without some kind of 
-      debounce. I'll test that later.
-*/
+// SwitchPanel class:
 
+// This is the driver for the panel of toggle switches. We can:
+//    - Turn the timer on and off.
+//    - Choose between long and short meditation sessions.
+//    - Set the piezo buzzer to beep when the session ends.
+// Issue #7 on github discusses debounce.
 class SwitchPanel
 {
 public:
+    // Set up panel, using pins defined in pins.h. Includes
+    // enabling of pull-up resistors and calls update()
+    // immediately.
     SwitchPanel();
     
+    // Check the position of the three switches and check
+    // whether anything has changed.
     void update();
     
+    // Each are true if the relevant switch is toggled on.
     bool timerOn;
     bool timeLong;
     bool buzzerOn;
     
+    // Each are true if the toggle state has changed
+    // since update() was last called.
     bool timerOnHasChanged;
     bool timeLongHasChanged;
     bool buzzerOnHasChanged;

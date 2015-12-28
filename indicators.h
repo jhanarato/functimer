@@ -17,12 +17,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* 
-The driver for the panel of three LEDs indicating the following:
-    - The timer is on (counting down) or off.
-    - The length of time is long or short.
-    - The buzzer will sound when the time is complete.
-*/
+// IndicatorPanel class:
+// Represents the three LED panel on the timer. Simply
+// make an instance and turn LEDs on and off and dim them
+// with PWM.
 class IndicatorPanel
 { 
 public:

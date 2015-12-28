@@ -17,7 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* The driver for our piezo buzzer. */
+// Buzzer class:
+// A simple wrapper for the piezo-buzzer code. TODO: Time should
+// be set to something noticable but not annoying. See issue #8.
 class Buzzer
 {
     int time;
