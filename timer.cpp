@@ -52,14 +52,23 @@ void Timer::start()
     startTime = millis();
 }
 
+void Timer::stop()
+{
+    started = false;
+    complete = false;
+}
+
 void Timer::update()
 {
-    int now = millis();
-    
-    if(now >= startTime + duration)
+    if(started)
     {
-        complete = true;
-        started = false;
-        startTime = 0;
+        int now = millis();
+        
+        if(now >= startTime + duration)
+        {
+            complete = true;
+            started = false;
+            startTime = 0;
+        }
     }
 }

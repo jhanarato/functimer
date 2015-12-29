@@ -59,6 +59,9 @@ public:
     // Start the timer.
     void start();
     
+    // Do not continue timing. 
+    void stop();
+    
     // Check to see if the set time has elapsed.
     // If so, isComplete() returns true until
     // the timer is restarted.
