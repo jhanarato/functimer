@@ -25,8 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // The time in milliseconds for the two
 // session lengths chosen via the toggle switch.
-const int LONG_TIME =   60000;
-const int SHORT_TIME =  10000;
+const int LONG_TIME =   10000;
+const int SHORT_TIME =  1000;
 
 IndicatorPanel indicators;
 SwitchPanel switches;
@@ -41,6 +41,11 @@ Timer sessionTimer;
 
 void setup()
 {
+    // If the device is turned on with the session
+    // timer switched on, start the session immediately.
+    switches.update();
+    if(switches.timerOn)
+        sessionTimer.start();
 }
 
 // Check the physical controls and act accordingly.
@@ -78,9 +83,10 @@ void control()
     
     if(switches.buzzerOn)
     {
+        indicators.buzzerOn();
+        
         if(switches.buzzerOnHasChanged)
         {
-            indicators.buzzerOn();
             buzzer.buzz();
         }
     }
