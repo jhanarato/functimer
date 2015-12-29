@@ -73,7 +73,7 @@ void finishEffect()
     fader.reset();
 }
 
-void loop()
+void flashWithTimerEffect()
 {
     testTimer.update();
     if(testTimer.isComplete())
@@ -89,6 +89,72 @@ void loop()
         ledOn = !ledOn;
         testTimer.start();
     }
+}
+
+// Keep track of the state of the device as per issue #2.
+// This could, perhaps, be refactored when happy with
+// the functionality.
+void manageState()
+{
+    if(switches.timerOn)
+    {
+        indicators.timerOn();
+        
+        if(switches.timerOnHasChanged)
+        {
+            // TODO: Start the session timer.
+        }
+        
+    }
+    else
+    {
+        indicators.timerOff();
+        
+        if(switches.timerOnHasChanged)
+        {
+            // TODO: Cancel the session timer.
+        }
+    }
+    
+    if(switches.timeLong)
+    {
+        indicators.timeIsLong();
+        
+        if(switches.timeLongHasChanged)
+        {
+            // TODO: Change session timer to long duration.
+        }     
+    }
+    else
+    {
+        indicators.timeIsShort();
+        
+        if(switches.timeLongHasChanged)
+        {
+            // TODO: Change the session timer to short duration.
+        }
+    }
+    
+    if(switches.buzzerOn)
+    {
+        indicators.buzzerOn();
+        
+        if(switches.buzzerOnHasChanged)
+        {
+            buzzer.buzz(); // Auditory indication of beep setting.
+        }
+    }
+    else
+    {
+        indicators.buzzerOff();
+    }
+}
+
+void loop()
+{
+    switches.update();
+    delay(50); // Debounce. See issue #7.
+    manageState();    
 }
 
 
