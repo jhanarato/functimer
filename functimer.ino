@@ -25,8 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // The time in milliseconds for the two
 // session lengths chosen via the toggle switch.
-const int LONG_TIME =   10000;
-const int SHORT_TIME =  1000;
+const int LONG_TIME =   20000;
+const int SHORT_TIME =  5000;
 
 IndicatorPanel indicators;
 SwitchPanel switches;
