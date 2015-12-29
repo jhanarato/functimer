@@ -23,78 +23,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "timer.h"
 #include "fader.h"
 
+// The time in milliseconds for the two
+// session lengths chosen via the toggle switch.
+const int LONG_TIME =   60000;
+const int SHORT_TIME =  10000;
+
 IndicatorPanel indicators;
 SwitchPanel switches;
 Buzzer buzzer = Buzzer(300);
 Fader fader;
 
+
+// HACK: Test code remains for the moment.
 Timer testTimer;
 bool ledOn;
 
+// Keep track of the the time for the given
+// session - that is, the time between starting
+// and indicating the end of the meditation
+// session.
+Timer sessionTimer;
+
 void setup()
 {
-    fader.setMinimum();
-    testTimer.setDuration(1000); // Do something every second.
-    testTimer.start();
-    ledOn = true; // Start with light on.
 }
 
-// This runs when the session is complete.
-void finishEffect()
-{
-    while(!fader.cycleComplete())
-    {
-        fader.fadeInAndOut();
-        int level = fader.getLevel();
-        indicators.buzzerDim(level);
-        delay(30);
-    }
-    
-    fader.reset();
-    
-    while(!fader.cycleComplete())
-    {
-        fader.fadeInAndOut();
-        int level = fader.getLevel();
-        indicators.longShortDim(level);
-        delay(30);
-    }
-    
-    fader.reset();
-    
-    while(!fader.cycleComplete())
-    {
-        fader.fadeInAndOut();
-        int level = fader.getLevel();
-        indicators.timerDim(level);
-        delay(30);
-    }
-    
-    fader.reset();
-}
-
-void flashWithTimerEffect()
-{
-    testTimer.update();
-    if(testTimer.isComplete())
-    {
-        if(ledOn)
-        {
-            indicators.allOn();
-        }
-        else
-        {
-            indicators.allOff();
-        }
-        ledOn = !ledOn;
-        testTimer.start();
-    }
-}
-
-// Keep track of the state of the device as per issue #2.
-// This could, perhaps, be refactored when happy with
-// the functionality.
-void manageState()
+// Check the physical controls and act accordingly.
+void control()
 {
     if(switches.timerOn)
     {
@@ -102,9 +57,8 @@ void manageState()
         
         if(switches.timerOnHasChanged)
         {
-            // TODO: Start the session timer.
+            sessionTimer.start();
         }
-        
     }
     else
     {
@@ -112,27 +66,19 @@ void manageState()
         
         if(switches.timerOnHasChanged)
         {
-            // TODO: Cancel the session timer.
+            sessionTimer.stop();
         }
     }
     
     if(switches.timeLong)
     {
         indicators.timeIsLong();
-        
-        if(switches.timeLongHasChanged)
-        {
-            // TODO: Change session timer to long duration.
-        }     
+        sessionTimer.setDuration(LONG_TIME);
     }
     else
     {
         indicators.timeIsShort();
-        
-        if(switches.timeLongHasChanged)
-        {
-            // TODO: Change the session timer to short duration.
-        }
+        sessionTimer.setDuration(SHORT_TIME);
     }
     
     if(switches.buzzerOn)
@@ -154,8 +100,15 @@ void loop()
 {
     switches.update();
     delay(50); // Debounce. See issue #7.
-    manageState();    
+    
+    control();
+
+    sessionTimer.update();
+    
+    if(sessionTimer.isComplete())
+    {
+        buzzer.buzz();
+        // TODO: Fade LEDs.
+        sessionTimer.stop();
+    }         
 }
-
-
-
