@@ -33,11 +33,6 @@ SwitchPanel switches;
 Buzzer buzzer = Buzzer(300);
 Fader fader;
 
-
-// HACK: Test code remains for the moment.
-Timer testTimer;
-bool ledOn;
-
 // Keep track of the the time for the given
 // session - that is, the time between starting
 // and indicating the end of the meditation
@@ -83,11 +78,10 @@ void control()
     
     if(switches.buzzerOn)
     {
-        indicators.buzzerOn();
-        
         if(switches.buzzerOnHasChanged)
         {
-            buzzer.buzz(); // Auditory indication of beep setting.
+            indicators.buzzerOn();
+            buzzer.buzz();
         }
     }
     else
@@ -107,8 +101,10 @@ void loop()
     
     if(sessionTimer.isComplete())
     {
-        buzzer.buzz();
-        // TODO: Fade LEDs.
+        if(switches.buzzerOn)
+        {
+            buzzer.buzz();
+        }
         sessionTimer.stop();
     }         
 }
