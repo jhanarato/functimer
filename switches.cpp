@@ -36,11 +36,12 @@ SwitchPanel::SwitchPanel()
 }
 void SwitchPanel::update()
 {
-    // NB: Bounce not handled here. (See issue #7)
     bool newTimerOn    = digitalRead(timerOnTogglePin)    == HIGH;
     bool newTimeLong = digitalRead(timeIsLongTogglePin) == HIGH;
     bool newBuzzerOn   = digitalRead(buzzerOnTogglePin)   == HIGH;
     
+    delay(50); // Debounce.
+        
     timerOnHasChanged =  timerOn != newTimerOn;
     timeLongHasChanged = timeLong != newTimeLong;
     buzzerOnHasChanged = buzzerOn != newBuzzerOn;

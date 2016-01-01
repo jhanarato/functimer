@@ -99,7 +99,6 @@ void control()
 void loop()
 {
     switches.update();
-    delay(50); // Debounce. See issue #7.
     
     control();
 
