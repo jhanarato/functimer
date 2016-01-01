@@ -31,8 +31,6 @@ SwitchPanel::SwitchPanel()
     digitalWrite(timerOnTogglePin,    HIGH);
     digitalWrite(timeIsLongTogglePin, HIGH);
     digitalWrite(buzzerOnTogglePin,   HIGH);
-    
-    update();
 }
 void SwitchPanel::update()
 {
@@ -40,7 +38,8 @@ void SwitchPanel::update()
     bool newTimeLong = digitalRead(timeIsLongTogglePin) == HIGH;
     bool newBuzzerOn   = digitalRead(buzzerOnTogglePin)   == HIGH;
     
-    delay(50); // Debounce.
+    // Debounce.
+    delay(50);
         
     timerOnHasChanged =  timerOn != newTimerOn;
     timeLongHasChanged = timeLong != newTimeLong;
