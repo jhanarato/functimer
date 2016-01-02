@@ -35,6 +35,9 @@ class Controller
     IndicatorPanel* indicators;
     Timer* sessionTimer;
     
+    // Check toggle-one on power-on.
+    void startImmediately();
+    
     // Controller for toggle-one.
     void startStop();
     

@@ -26,9 +26,13 @@ Controller::Controller(SwitchPanel* switches,
     this->indicators = indicators;
     this->sessionTimer = sessionTimer;
     
-    // If the device is turned on with the session
-    // timer switched on, start the session immediately.
+    startImmediately();
+}
+
+void Controller::startImmediately()
+{
     switches->update();
+    
     if(switches->timerOn)
         sessionTimer->start();
 }
