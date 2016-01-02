@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 IndicatorPanel* indicators = 0;
 SwitchPanel* switches = 0;
 Timer* sessionTimer = 0;
+Controller* controller = 0;
 
 void setup()
 {
@@ -34,19 +35,12 @@ void setup()
     switches = new SwitchPanel();
     sessionTimer = new Timer();
     
-    // If the device is turned on with the session
-    // timer switched on, start the session immediately.
-    // TODO: Defer this functionality to the control class.
-    switches->update();
-    if(switches->timerOn)
-        sessionTimer->start();
+    controller = new Controller(switches, indicators, sessionTimer);
 }
 
 void loop()
 {
-    switches->update();
-    
-    control(switches, indicators, sessionTimer);
+    controller->update();
 
     sessionTimer->update();
     

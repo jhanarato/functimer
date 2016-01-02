@@ -18,7 +18,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "control.h"
 
-void control(SwitchPanel* switches, IndicatorPanel* indicators, Timer* sessionTimer)
+Controller::Controller(SwitchPanel* switches, 
+                       IndicatorPanel* indicators, 
+                       Timer* sessionTimer)
+{
+    this->switches = switches;
+    this->indicators = indicators;
+    this->sessionTimer = sessionTimer;
+    
+    // If the device is turned on with the session
+    // timer switched on, start the session immediately.
+    switches->update();
+    if(switches->timerOn)
+        sessionTimer->start();
+}
+
+void Controller::update()
+{
+    switches->update();
+    
+    startStop();
+    longShort();
+    buzzer();
+}
+
+void Controller::startStop()
 {
     if(switches->timerOn)
     {
@@ -38,7 +62,10 @@ void control(SwitchPanel* switches, IndicatorPanel* indicators, Timer* sessionTi
             sessionTimer->stop();
         }
     }
-    
+}
+
+void Controller::longShort()
+{
     if(switches->timeLong)
     {
         indicators->timeIsLong();
@@ -49,7 +76,10 @@ void control(SwitchPanel* switches, IndicatorPanel* indicators, Timer* sessionTi
         indicators->timeIsShort();
         sessionTimer->setDuration(SHORT_TIME);
     }
-    
+}
+
+void Controller::buzzer()
+{
     if(switches->buzzerOn)
     {
         indicators->buzzerOn();

@@ -16,6 +16,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef CONTROL_H
+#define CONTROL_H
+
 #include "indicators.h"
 #include "switches.h"
 #include "buzzer.h"
@@ -26,6 +29,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 const int LONG_TIME =   20000;
 const int SHORT_TIME =  5000;
 
-void control(SwitchPanel* switches, 
-             IndicatorPanel* indicators, 
-             Timer* sessionTimer);
+class Controller
+{
+    SwitchPanel* switches;
+    IndicatorPanel* indicators;
+    Timer* sessionTimer;
+    
+    // Controller for toggle-one.
+    void startStop();
+    
+    // Controller for toggle-two.
+    void longShort();
+    
+    // Controller for toggle-three.
+    void buzzer();
+    
+public:
+    Controller(SwitchPanel* switches, 
+               IndicatorPanel* indicators, 
+               Timer* sessionTimer);
+                 
+    void update();
+};
+#endif
