@@ -17,6 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef INDICATORS_H
+#define INDICATORS_H
+
 // IndicatorPanel class:
 // Represents the three LED panel on the timer. Simply
 // make an instance and turn LEDs on and off and dim them
@@ -42,3 +45,5 @@ public:
     void allOff();
     void allDim(int dimness);
 };
+
+#endif

@@ -16,6 +16,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef TIMER_H
+#define TIMER_H
 
 enum timer_mode_t { STARTED, RUNNING, STOPPED, COMPLETED };
 
@@ -68,4 +70,4 @@ public:
     // the timer is restarted.
     void update();
 };
-
+#endif
