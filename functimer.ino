@@ -21,95 +21,44 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "switches.h"
 #include "buzzer.h"
 #include "timer.h"
-#include "fader.h"
+#include "control.h"
 
-// The time in milliseconds for the two
-// session lengths chosen via the toggle switch.
-const int LONG_TIME =   20000;
-const int SHORT_TIME =  5000;
-
-IndicatorPanel indicators;
-SwitchPanel switches;
-Buzzer buzzer = Buzzer();
-Fader fader;
-
-// Keep track of the the time for the given
-// session - that is, the time between starting
-// and indicating the end of the meditation
-// session.
-Timer sessionTimer;
+// Defer instantiation to setup() function - put them on the heap.
+IndicatorPanel* indicators = 0;
+SwitchPanel* switches = 0;
+Timer* sessionTimer = 0;
 
 void setup()
 {
+    indicators = new IndicatorPanel();
+    switches = new SwitchPanel();
+    sessionTimer = new Timer();
+    
     // If the device is turned on with the session
     // timer switched on, start the session immediately.
-    switches.update();
-    if(switches.timerOn)
-        sessionTimer.start();
-}
-
-// Check the physical controls and act accordingly.
-void control()
-{
-    if(switches.timerOn)
-    {
-        indicators.timerOn();
-        
-        if(switches.timerOnHasChanged)
-        {
-            sessionTimer.start();
-        }
-    }
-    else
-    {
-        indicators.timerOff();
-        
-        if(switches.timerOnHasChanged)
-        {
-            sessionTimer.stop();
-        }
-    }
-    
-    if(switches.timeLong)
-    {
-        indicators.timeIsLong();
-        sessionTimer.setDuration(LONG_TIME);
-    }
-    else
-    {
-        indicators.timeIsShort();
-        sessionTimer.setDuration(SHORT_TIME);
-    }
-    
-    if(switches.buzzerOn)
-    {
-        indicators.buzzerOn();
-        
-        if(switches.buzzerOnHasChanged)
-        {
-            buzzer.buzz();
-        }
-    }
-    else
-    {
-        indicators.buzzerOff();
-    }
+    // TODO: Defer this functionality to the control class.
+    switches->update();
+    if(switches->timerOn)
+        sessionTimer->start();
 }
 
 void loop()
 {
-    switches.update();
+    switches->update();
     
-    control();
+    control(switches, indicators, sessionTimer);
 
-    sessionTimer.update();
+    sessionTimer->update();
     
-    if(sessionTimer.isComplete())
+    if(sessionTimer->isComplete())
     {
-        if(switches.buzzerOn)
+        if(switches->buzzerOn)
         {
+            // TODO: Perhaps Buzzer could be a simple function
+            // rather than a class.
+            Buzzer buzzer;
             buzzer.buzz();
         }
-        sessionTimer.stop();
+        sessionTimer->stop();
     }         
 }
