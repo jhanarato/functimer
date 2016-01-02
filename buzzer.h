@@ -18,12 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 // Buzzer class:
-// A simple wrapper for the piezo-buzzer code. TODO: Time should
-// be set to something noticable but not annoying. See issue #8.
+// A simple wrapper for the piezo-buzzer code. 
 class Buzzer
 {
     int time;
 public:
-    Buzzer(int time);
+    Buzzer();
     void buzz();
 };

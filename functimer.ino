@@ -30,7 +30,7 @@ const int SHORT_TIME =  5000;
 
 IndicatorPanel indicators;
 SwitchPanel switches;
-Buzzer buzzer = Buzzer(300);
+Buzzer buzzer = Buzzer();
 Fader fader;
 
 // Keep track of the the time for the given

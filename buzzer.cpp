@@ -21,9 +21,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "pins.h"
 #include "buzzer.h"
 
-Buzzer::Buzzer(int time)
+Buzzer::Buzzer()
 {
-    this->time = time;
+    time = 50; // Audible and brief.
     pinMode(alarmBuzzerPin, OUTPUT);
 }
 
