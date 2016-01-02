@@ -47,6 +47,9 @@ class Controller
     // Controller for toggle-three.
     void buzzer();
     
+    // Check the session timer.
+    void checkTimer();
+    
 public:
     Controller(SwitchPanel* switches, 
                IndicatorPanel* indicators, 

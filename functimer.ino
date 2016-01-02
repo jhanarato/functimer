@@ -41,18 +41,4 @@ void setup()
 void loop()
 {
     controller->update();
-
-    sessionTimer->update();
-    
-    if(sessionTimer->isComplete())
-    {
-        if(switches->buzzerOn)
-        {
-            // TODO: Perhaps Buzzer could be a simple function
-            // rather than a class.
-            Buzzer buzzer;
-            buzzer.buzz();
-        }
-        sessionTimer->stop();
-    }         
 }

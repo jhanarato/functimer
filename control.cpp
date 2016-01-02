@@ -39,11 +39,15 @@ void Controller::startImmediately()
 
 void Controller::update()
 {
+    // Check the state of the switches and act accordingly.
     switches->update();
     
     startStop();
     longShort();
     buzzer();
+    
+    // Check the session timer and act accordingly.
+    checkTimer();
 }
 
 void Controller::startStop()
@@ -97,5 +101,22 @@ void Controller::buzzer()
     else
     {
         indicators->buzzerOff();
+    }
+}
+
+void Controller::checkTimer()
+{
+    sessionTimer->update();
+    
+    if(sessionTimer->isComplete())
+    {
+        if(switches->buzzerOn)
+        {
+            // TODO: Perhaps Buzzer could be a simple function
+            // rather than a class.
+            Buzzer buzzer;
+            buzzer.buzz();
+        }
+        sessionTimer->stop();
     }
 }
