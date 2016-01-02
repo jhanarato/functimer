@@ -24,9 +24,7 @@ Timer::Timer()
 {
     startTime = 0;
     duration = 0;
-    
-    started = false;
-    complete = false;
+    mode = STOPPED;
 }
 
 void Timer::setDuration(int duration)
@@ -36,38 +34,35 @@ void Timer::setDuration(int duration)
 
 bool Timer::isStarted()
 {
-    return started;
+    return mode == STARTED;
 }
 
 bool Timer::isComplete()
 {
-    return complete;
+    return mode == COMPLETED;
 }
 
 void Timer::start()
 {
-    started = true;
-    complete = false;
-    
+    mode = STARTED;
     startTime = millis();
 }
 
 void Timer::stop()
 {
-    started = false;
-    complete = false;
+    mode = STOPPED;
+    startTime = 0;
 }
 
 void Timer::update()
 {
-    if(started)
+    if(mode == STARTED)
     {
         int now = millis();
         
         if(now >= startTime + duration)
         {
-            complete = true;
-            started = false;
+            mode = COMPLETED;
             startTime = 0;
         }
     }

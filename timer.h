@@ -17,6 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+enum timer_mode_t { STARTED, RUNNING, STOPPED, COMPLETED };
+
 // Timer class:
 // Implemented to allow for multiple timers to run concurrently. 
 // Several timer objects can exist at once, keeping track of time
@@ -26,17 +28,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // of complexity in the name of Doing Things Right.
 class Timer
 {
-    // The time in millis when the timer begun.
+    // The time in millis when the timer begun. Set to zero
+    // unless mode is STARTED.
     int startTime;
     
     // The time we are waiting in millis.
     int duration;
     
-    // The timer has begun.
-    bool started;
-    
-    // The duration of time set has passed.
-    bool complete;
+    // The current mode of the timer. Using an enum type
+    // to manage a state machine.
+    timer_mode_t mode;
     
 public:
     // Create a new timer - neither started nor complete.
