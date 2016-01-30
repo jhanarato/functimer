@@ -22,7 +22,7 @@ BlinkEffect::BlinkEffect(SwitchPanel* switches, IndicatorPanel* indicators)
     this->switches = switches;
     this->indicators = indicators;
     ledsOn = true;
-    delayTimer.setDuration(5000);
+    delayTimer.setDuration(500);
 }
 
 void BlinkEffect::start()
