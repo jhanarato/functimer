@@ -24,7 +24,7 @@ class SwitchIndicatorEffect : public LedEffect
 {
 public:
     SwitchIndicatorEffect(SwitchPanel* switches, IndicatorPanel* indicators);
-    void update();
+    virtual void update();
 };
 
 #endif

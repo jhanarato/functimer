@@ -24,8 +24,8 @@ class BlinkEffect : public LedEffect
 {
 public:
     BlinkEffect(SwitchPanel* switches, IndicatorPanel* indicators);
-    void start();
-    void update();
+    virtual void start();
+    virtual void update();
 private:
     bool ledsOn;
     Timer delayTimer;

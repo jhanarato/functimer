@@ -28,8 +28,8 @@ class LedEffect
 {
 public:
     LedEffect();
-    void start();
-    void update();
+    virtual void start();
+    virtual void update();
     
     SwitchPanel* switches; 
     IndicatorPanel* indicators;
