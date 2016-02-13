@@ -27,7 +27,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class LedEffect
 {
 public:
-    LedEffect();
+    LedEffect(SwitchPanel* switches, IndicatorPanel* indicators) 
+              : switches(switches), indicators(indicators) {}
+              
     virtual void start();
     virtual void update();
     

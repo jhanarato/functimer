@@ -17,8 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "led_effect.h"
 
-LedEffect::LedEffect() {}
-
 void LedEffect::start() {}
 
 void LedEffect::update() {}

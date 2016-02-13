@@ -17,10 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "switch_indicator_effect.h"
 
-SwitchIndicatorEffect::SwitchIndicatorEffect(SwitchPanel* switches, IndicatorPanel* indicators)
+SwitchIndicatorEffect::SwitchIndicatorEffect(SwitchPanel* switches, IndicatorPanel* indicators) 
+                                             : LedEffect(switches, indicators)
 {
-    this->switches = switches;
-    this->indicators = indicators;
 }
 
 void SwitchIndicatorEffect::update()
