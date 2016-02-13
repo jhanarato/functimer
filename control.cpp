@@ -94,8 +94,6 @@ void Controller::buzzer()
         
         if(switches->buzzerOnHasChanged)
         {
-            Buzzer buzzer;
-            buzzer.buzz();
         }
     }
     else
@@ -112,10 +110,6 @@ void Controller::checkTimer()
     {
         if(switches->buzzerOn)
         {
-            // TODO: Perhaps Buzzer could be a simple function
-            // rather than a class.
-            Buzzer buzzer;
-            buzzer.buzz();
         }
         sessionTimer->stop();
     }
