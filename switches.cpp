@@ -31,6 +31,9 @@ SwitchPanel::SwitchPanel()
     digitalWrite(timerOnTogglePin,    HIGH);
     digitalWrite(timeIsLongTogglePin, HIGH);
     digitalWrite(buzzerOnTogglePin,   HIGH);
+    
+    debounceTimer.setDuration(100);
+    debounceTimer.start();
 }
 void SwitchPanel::update()
 {
@@ -38,14 +41,18 @@ void SwitchPanel::update()
     bool newTimeLong = digitalRead(timeIsLongTogglePin) == HIGH;
     bool newBuzzerOn   = digitalRead(buzzerOnTogglePin)   == HIGH;
     
-    // Debounce.
-    delay(50);
-        
-    timerOnHasChanged =  timerOn != newTimerOn;
-    timeLongHasChanged = timeLong != newTimeLong;
-    buzzerOnHasChanged = buzzerOn != newBuzzerOn;
+    debounceTimer.update();
     
-    timerOn = newTimerOn;
-    timeLong = newTimeLong;
-    buzzerOn = newBuzzerOn;
+    if(debounceTimer.isComplete())
+    {    
+        timerOnHasChanged =  timerOn != newTimerOn;
+        timeLongHasChanged = timeLong != newTimeLong;
+        buzzerOnHasChanged = buzzerOn != newBuzzerOn;
+        
+        timerOn = newTimerOn;
+        timeLong = newTimeLong;
+        buzzerOn = newBuzzerOn;
+        
+        debounceTimer.start();
+    }
 }

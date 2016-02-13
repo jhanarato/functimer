@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef SWITCHES_H
 #define SWITCHES_H
 
+#include "timer.h"
+
 // SwitchPanel class:
 
 // This is the driver for the panel of toggle switches. We can:
@@ -28,6 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Issue #7 on github discusses debounce.
 class SwitchPanel
 {
+    Timer debounceTimer;
 public:
     // Set up panel, using pins defined in pins.h. Includes
     // enabling of pull-up resistors and calls update()
