@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef TIMER_H
 #define TIMER_H
 
-enum timer_mode_t { STARTED, RUNNING, STOPPED, COMPLETED };
+enum timer_mode_t { STARTED, STOPPED, COMPLETED };
 
 // Timer class:
 // Implemented to allow for multiple timers to run concurrently. 
