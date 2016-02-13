@@ -18,19 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "control.h"
 
-Controller::Controller(SwitchPanel* switches, 
-                       IndicatorPanel* indicators, 
-                       Timer* sessionTimer)
+Controller::Controller()
 {
-    this->switches = switches;
-    this->indicators = indicators;
-    this->sessionTimer = sessionTimer;
+    switches = new SwitchPanel();
+    indicators = new IndicatorPanel();
     
-    startImmediately();
-}
-
-void Controller::startImmediately()
-{
+    switchIndicatorEffect = new SwitchIndicatorEffect(switches, indicators);
+    pulseEffect = new PulseEffect(switches, indicators);
+    
+    currentEffect = pulseEffect;
+    
     switches->update();
     
     if(switches->timerOn)

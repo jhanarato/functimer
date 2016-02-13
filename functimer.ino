@@ -17,25 +17,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "indicators.h"
-#include "switches.h"
-#include "buzzer.h"
-#include "timer.h"
 #include "control.h"
 
-// Defer instantiation to setup() function - put them on the heap.
-IndicatorPanel* indicators = 0;
-SwitchPanel* switches = 0;
-Timer* sessionTimer = 0;
-Controller* controller = 0;
+Controller* controller = 0; // On heap to avoid pre setup() instantiation.
 
 void setup()
 {
-    indicators = new IndicatorPanel();
-    switches = new SwitchPanel();
-    sessionTimer = new Timer();
-    
-    controller = new Controller(switches, indicators, sessionTimer);
+    controller = new Controller();
 }
 
 void loop()
