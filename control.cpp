@@ -29,13 +29,21 @@ Controller::Controller()
     effects->start();
     
     sessionTimer = new Timer();
-    sessionTimer->setSeconds(10);
-    sessionTimer->start();
+    sessionTimer->setSeconds(3);
 }
 
 void Controller::update()
 {  
     switches->update();
+    
+    if(sessionStarted())
+    {
+        effects->switchIndicator();
+        effects->start();
+        
+        sessionTimer->start();
+    }
+    
     sessionTimer->update();
     
     if(sessionTimer->isComplete())
@@ -49,8 +57,6 @@ void Controller::update()
 }
 
 bool Controller::sessionStarted()
-{
-    // Bug - for some reason this always returns true;
-    switches->update();
+{    
     return switches->timerOn && switches->timerOnHasChanged;
 }

@@ -36,15 +36,15 @@ SwitchPanel::SwitchPanel()
     debounceTimer.start();
 }
 void SwitchPanel::update()
-{
-    bool newTimerOn    = digitalRead(timerOnTogglePin)    == HIGH;
-    bool newTimeLong = digitalRead(timeIsLongTogglePin) == HIGH;
-    bool newBuzzerOn   = digitalRead(buzzerOnTogglePin)   == HIGH;
-    
+{    
     debounceTimer.update();
     
     if(debounceTimer.isComplete())
     {    
+        bool newTimerOn    = digitalRead(timerOnTogglePin)    == HIGH;
+        bool newTimeLong = digitalRead(timeIsLongTogglePin) == HIGH;
+        bool newBuzzerOn   = digitalRead(buzzerOnTogglePin)   == HIGH;
+    
         timerOnHasChanged =  timerOn != newTimerOn;
         timeLongHasChanged = timeLong != newTimeLong;
         buzzerOnHasChanged = buzzerOn != newBuzzerOn;
