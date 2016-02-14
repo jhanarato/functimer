@@ -1,7 +1,7 @@
 /* 
 This is the "official" arduino sketch for operating the "Functional Timer".
 
-Copyright 2015 Bhikkhu Jhanarato 
+Copyright 2015, 2016 Bhikkhu Jhanarato 
   
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,7 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "control.h"
 
-Controller* controller = 0; // On heap to avoid pre setup() instantiation.
+// On heap to avoid pre setup() instantiation.
+Controller* controller = 0;
 
 void setup()
 {
