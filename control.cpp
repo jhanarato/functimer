@@ -1,7 +1,7 @@
 /* 
 This is the "official" arduino sketch for operating the "Functional Timer".
 
-Copyright 2015 Bhikkhu Jhanarato 
+Copyright 2015, 2016 Bhikkhu Jhanarato 
   
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,91 +23,34 @@ Controller::Controller()
     switches = new SwitchPanel();
     indicators = new IndicatorPanel();
     
-    switchIndicatorEffect = new SwitchIndicatorEffect(switches, indicators);
-    pulseEffect = new PulseEffect(switches, indicators);
+    effects = new EffectsManager(switches, indicators);
     
-    currentEffect = pulseEffect;
+    effects->switchIndicator();
+    effects->start();
     
-    switches->update();
-    
-    if(switches->timerOn)
-        sessionTimer->start();
+    sessionTimer = new Timer();
+    sessionTimer->setMilliseconds(5000);
+    sessionTimer->start();
 }
 
 void Controller::update()
-{
-    // Check the state of the switches and act accordingly.
+{  
     switches->update();
-    
-    startStop();
-    longShort();
-    buzzer();
-    
-    // Check the session timer and act accordingly.
-    checkTimer();
-}
-
-void Controller::startStop()
-{
-    if(switches->timerOn)
-    {
-        indicators->timerOn();
-        
-        if(switches->timerOnHasChanged)
-        {
-            sessionTimer->start();
-        }
-    }
-    else
-    {
-        indicators->timerOff();
-        
-        if(switches->timerOnHasChanged)
-        {
-            sessionTimer->stop();
-        }
-    }
-}
-
-void Controller::longShort()
-{
-    if(switches->timeLong)
-    {
-        indicators->timeIsLong();
-        sessionTimer->setDuration(LONG_TIME);
-    }
-    else
-    {
-        indicators->timeIsShort();
-        sessionTimer->setDuration(SHORT_TIME);
-    }
-}
-
-void Controller::buzzer()
-{
-    if(switches->buzzerOn)
-    {
-        indicators->buzzerOn();
-        
-        if(switches->buzzerOnHasChanged)
-        {
-        }
-    }
-    else
-    {
-        indicators->buzzerOff();
-    }
-}
-
-void Controller::checkTimer()
-{
     sessionTimer->update();
     
     if(sessionTimer->isComplete())
     {
-        if(switches->buzzerOn)
-        {
-        }
+        effects->pulse();
+        effects->start();
         sessionTimer->stop();
     }
+    
+    effects->update();
+}
+
+bool Controller::sessionStarted()
+{
+    // Bug - for some reason this always returns true;
+    switches->update();
+    return switches->timerOn && switches->timerOnHasChanged;
 }

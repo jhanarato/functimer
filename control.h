@@ -1,7 +1,7 @@
 /* 
 This is the "official" arduino sketch for operating the "Functional Timer".
 
-Copyright 2015 Bhikkhu Jhanarato 
+Copyright 2015, 2016 Bhikkhu Jhanarato 
   
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,16 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "indicators.h"
 #include "switches.h"
-#include "buzzer.h"
 #include "timer.h"
-#include "led_effect.h"
-#include "switch_indicator_effect.h"
-#include "pulse_effect.h"
-
-// The time in milliseconds for the two
-// session lengths chosen via the toggle switch.
-const int LONG_TIME =   20000;
-const int SHORT_TIME =  5000;
+#include "effects_manager.h"
 
 class Controller
 {
@@ -38,31 +30,16 @@ class Controller
     SwitchPanel* switches;
     IndicatorPanel* indicators;
     
-    // The timer for the current meditation session.
+    // Light effects.
+    EffectsManager* effects;
+    
+    // Keep track of time.
     Timer* sessionTimer;
-    
-    // The LED effect currently being displayed.
-    LedEffect* currentEffect;
-    
-    // currentEffect could be either of these.
-    SwitchIndicatorEffect* switchIndicatorEffect;
-    PulseEffect* pulseEffect;
-    
-    // Controller for toggle-one.
-    void startStop();
-    
-    // Controller for toggle-two.
-    void longShort();
-    
-    // Controller for toggle-three.
-    void buzzer();
-    
-    // Check the session timer.
-    void checkTimer();
     
 public:
     Controller();
                  
     void update();
+    bool sessionStarted();
 };
 #endif
