@@ -36,7 +36,7 @@ void Controller::update()
 {  
     switches->update();
     
-    if(sessionStarted())
+    if(newSessionStarted())
     {
         effects->switchIndicator();
         effects->start();
@@ -56,7 +56,7 @@ void Controller::update()
     effects->update();
 }
 
-bool Controller::sessionStarted()
+bool Controller::newSessionStarted()
 {    
     return switches->timerOn && switches->timerOnHasChanged;
 }

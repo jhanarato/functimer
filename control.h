@@ -40,6 +40,6 @@ public:
     Controller();
                  
     void update();
-    bool sessionStarted();
+    bool newSessionStarted();
 };
 #endif
