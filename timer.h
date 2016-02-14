@@ -48,7 +48,13 @@ public:
     // Set the time in millis between the 
     // start and finish of the timer. This can be called
     // at any time after object instatiation.
-    void setDuration(int duration);
+    void setMilliseconds(int milliseconds);
+    
+    // As per setMilliseconds() but duration is in seconds.
+    void setSeconds(int seconds);
+    
+    // As per setMilliseconds() but duration is in minutes.
+    void setMinutes(int minutes);
     
     // Returns true if the timer has started
     // but is not complete.

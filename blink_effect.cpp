@@ -21,7 +21,7 @@ BlinkEffect::BlinkEffect(SwitchPanel* switches, IndicatorPanel* indicators)
                          : LedEffect(switches, indicators)
 {
     ledsOn = true;
-    delayTimer.setDuration(3000);
+    delayTimer.setMilliseconds(3000);
 }
 
 void BlinkEffect::start()

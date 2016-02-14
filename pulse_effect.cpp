@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 PulseEffect::PulseEffect(SwitchPanel* switches, IndicatorPanel* indicators) 
                          : LedEffect(switches, indicators)
 {
-    delayTimer.setDuration(30);
+    delayTimer.setMilliseconds(30);
 }
 
 void PulseEffect::start()

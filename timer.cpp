@@ -27,9 +27,19 @@ Timer::Timer()
     mode = STOPPED;
 }
 
-void Timer::setDuration(int duration)
+void Timer::setMilliseconds(int milliseconds)
 {
-    this->duration = duration;
+    this->duration = milliseconds;
+}
+
+void Timer::setSeconds(int seconds)
+{
+    this->duration = seconds * 1000;
+}
+
+void Timer::setMinutes(int minutes)
+{
+    this->duration = minutes * 60 * 1000;
 }
 
 bool Timer::isStarted()

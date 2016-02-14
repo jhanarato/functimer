@@ -32,7 +32,7 @@ SwitchPanel::SwitchPanel()
     digitalWrite(timeIsLongTogglePin, HIGH);
     digitalWrite(buzzerOnTogglePin,   HIGH);
     
-    debounceTimer.setDuration(100);
+    debounceTimer.setMilliseconds(100);
     debounceTimer.start();
 }
 void SwitchPanel::update()
