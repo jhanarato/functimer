@@ -25,6 +25,7 @@ EffectsManager::EffectsManager(SwitchPanel* switches,
     
     pulseEffect = new PulseEffect(switches, indicators);
     blinkEffect = new BlinkEffect(switches, indicators);
+    offEffect = new OffEffect(switches, indicators);
     switchIndicatorEffect = new SwitchIndicatorEffect(switches, indicators);
     
     // Default effect
@@ -51,6 +52,10 @@ void EffectsManager::blink()
     currentEffect = blinkEffect;
 }
 
+void EffectsManager::off()
+{
+    currentEffect = offEffect;
+}
 void EffectsManager::switchIndicator()
 {
     currentEffect = switchIndicatorEffect;

@@ -14,36 +14,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef EFFECTS_MANAGER_H
-#define EFFECTS_MANAGER_H
+#ifndef OFF_EFFECT_H
+#define OFF_EFFECT_H
 
 #include "led_effect.h"
-#include "pulse_effect.h"
-#include "blink_effect.h"
-#include "off_effect.h"
-#include "switch_indicator_effect.h"
 
-class EffectsManager 
+// Turn off all LEDs.
+class OffEffect : public LedEffect
 {
-    SwitchPanel* switches;
-    IndicatorPanel* indicators;
-    
-    LedEffect* currentEffect;
-    PulseEffect* pulseEffect;
-    BlinkEffect* blinkEffect;
-    OffEffect* offEffect;
-    SwitchIndicatorEffect* switchIndicatorEffect;
-    
 public:
-    EffectsManager(SwitchPanel* switches, 
-                   IndicatorPanel* indicators); 
-                   
-    void start();
-    void update();
-    void pulse();
-    void blink();
-    void off();
-    void switchIndicator();               
+    OffEffect(SwitchPanel* switches, IndicatorPanel* indicators);
+    virtual void start();
+    virtual void update();
 };
 
 #endif
