@@ -29,7 +29,7 @@ Controller::Controller()
     effects->start();
     
     sessionTimer = new Timer();
-    sessionTimer->setMilliseconds(5000);
+    sessionTimer->setSeconds(10);
     sessionTimer->start();
 }
 
