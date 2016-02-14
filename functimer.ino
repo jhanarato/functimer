@@ -25,6 +25,7 @@ Controller* controller = 0;
 void setup()
 {
     controller = new Controller();
+    controller->start();
 }
 
 void loop()

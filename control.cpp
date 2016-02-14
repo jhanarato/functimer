@@ -32,6 +32,10 @@ Controller::Controller()
     sessionTimer->setSeconds(3);
 }
 
+void Controller::start()
+{
+}
+
 void Controller::update()
 {  
     switches->update();
