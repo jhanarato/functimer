@@ -24,12 +24,11 @@ Controller::Controller()
     indicators = new IndicatorPanel();
     
     effects = new EffectsManager(switches, indicators);
-    sessionTimer = new Timer();
 }
 
 void Controller::start()
 {
-    sessionTimer->setSeconds(3);
+    sessionTimer.setSeconds(3);
     
     effects->switchIndicator();
     effects->start();
@@ -52,16 +51,16 @@ void Controller::update()
         effects->switchIndicator();
         effects->start();
         
-        sessionTimer->start();
+        sessionTimer.start();
     }
     
-    sessionTimer->update();
+    sessionTimer.update();
     
-    if(sessionTimer->isComplete())
+    if(sessionTimer.isComplete())
     {
         effects->pulse();
         effects->start();
-        sessionTimer->stop();
+        sessionTimer.stop();
     }
     
     effects->update();

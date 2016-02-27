@@ -33,8 +33,9 @@ class Controller
     // Light effects.
     EffectsManager* effects;
     
-    // Keep track of time.
-    Timer* sessionTimer;
+    // Keep track of time. I was using a pointer with
+    // heap allocation, but ran into a compiler bug.
+    Timer sessionTimer;
     
 public:
     Controller();
