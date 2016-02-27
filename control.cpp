@@ -38,15 +38,7 @@ void Controller::update()
 {  
     switches->update();
     
-    bool timerToggledOn = true;
-    
-    // The state of the timer-on switch has not changed.
-    if(!switches->timerOnHasChanged) timerToggledOn = false;
-    
-    // The state of the timer-on switch is off.
-    if(!switches->timerOn) timerToggledOn = false;
-    
-    if(timerToggledOn)
+    if(timerSwitchedOn())
     {
         effects->switchIndicator();
         effects->start();
@@ -64,4 +56,16 @@ void Controller::update()
     }
     
     effects->update();
+}
+
+bool Controller::timerSwitchedOn()
+{
+    // The state of the timer-on switch has not changed.
+    if(!switches->timerOnHasChanged) return false;
+    
+    // The state of the timer-on switch is off.
+    if(!switches->timerOn) return false;
+    
+    // The timer has been switched from off to on.
+    return true;
 }

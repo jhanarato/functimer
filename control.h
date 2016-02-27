@@ -37,6 +37,10 @@ class Controller
     // heap allocation, but ran into a compiler bug.
     Timer sessionTimer;
     
+    // True if the timer toggle has been switched on
+    // since the last time we checked.
+    bool timerSwitchedOn();
+    
 public:
     Controller();
     void start();    
