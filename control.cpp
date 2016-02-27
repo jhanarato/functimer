@@ -24,23 +24,30 @@ Controller::Controller()
     indicators = new IndicatorPanel();
     
     effects = new EffectsManager(switches, indicators);
-    
-    effects->switchIndicator();
-    effects->start();
-    
     sessionTimer = new Timer();
-    sessionTimer->setSeconds(3);
 }
 
 void Controller::start()
 {
+    sessionTimer->setSeconds(3);
+    
+    effects->switchIndicator();
+    effects->start();
 }
 
 void Controller::update()
 {  
     switches->update();
     
-    if(newSessionStarted())
+    bool timerToggledOn = true;
+    
+    // The state of the timer-on switch has not changed.
+    if(!switches->timerOnHasChanged) timerToggledOn = false;
+    
+    // The state of the timer-on switch is off.
+    if(!switches->timerOn) timerToggledOn = false;
+    
+    if(timerToggledOn)
     {
         effects->switchIndicator();
         effects->start();
@@ -58,9 +65,4 @@ void Controller::update()
     }
     
     effects->update();
-}
-
-bool Controller::newSessionStarted()
-{    
-    return switches->timerOn && switches->timerOnHasChanged;
 }
