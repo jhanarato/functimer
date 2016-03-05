@@ -36,16 +36,28 @@ void Controller::start()
 
 void Controller::update()
 {  
+    // On/Off switch toggled?
     switches->update();
     
-    if(timerSwitchedOn())
+    if(switches->timerOnHasChanged)
     {
-        effects->switchIndicator();
-        effects->start();
-        
-        sessionTimer.start();
+        if(switches->timerOn)
+        {
+            effects->switchIndicator();
+            effects->start();
+            
+            sessionTimer.start();
+        }
+        else
+        {
+            effects->switchIndicator();
+            effects->start();
+            
+            sessionTimer.stop();
+        }
     }
     
+    // Time is up?
     sessionTimer.update();
     
     if(sessionTimer.isComplete())
