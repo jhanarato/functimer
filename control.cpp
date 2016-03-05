@@ -45,6 +45,7 @@ void Controller::update()
     
     onOffToggled();
     longShortToggled();
+    buzzerOnToggled();
     sessionEnded();
     
     effects->update();
@@ -82,6 +83,19 @@ void Controller::longShortToggled()
         else
         {
             sessionTimer.setSeconds(SHORT_SESSION_SECONDS);
+        }
+    }
+}
+
+void Controller::buzzerOnToggled()
+{
+    if(switches->buzzerOnHasChanged)
+    {
+        if(switches->buzzerOn)
+        {
+        }
+        else
+        {
         }
     }
 }

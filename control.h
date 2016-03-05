@@ -40,6 +40,7 @@ class Controller
     // Check for events.
     void onOffToggled();
     void longShortToggled();
+    void buzzerOnToggled();
     void sessionEnded();
     
 public:
