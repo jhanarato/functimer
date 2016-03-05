@@ -16,15 +16,21 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #include "control.h"
 
+// Debug settings.
 const int LONG_SESSION_SECONDS = 10;
 const int SHORT_SESSION_SECONDS = 5;
+
+const int LONG_SESSION_MINUTES = 2;
+const int SHORT_SESSION_MINUTES = 1;
 
 Controller::Controller()
 {
     switches = new SwitchPanel();
     indicators = new IndicatorPanel();
+    buzzer = new Buzzer();
     
     effects = new EffectsManager(switches, indicators);
 }
@@ -33,8 +39,9 @@ void Controller::start()
 {    
     effects->switchIndicator();
     effects->start();
+
+    sessionTimer.setMinutes(SHORT_SESSION_MINUTES);
     
-    sessionTimer.setSeconds(SHORT_SESSION_SECONDS);
     sessionTimer.stop();
 }
 
@@ -49,6 +56,7 @@ void Controller::update()
     sessionEnded();
     
     effects->update();
+    buzzer->update();
 }
 
 void Controller::onOffToggled()
@@ -78,11 +86,11 @@ void Controller::longShortToggled()
     {
         if(switches->timeLong)
         {
-            sessionTimer.setSeconds(LONG_SESSION_SECONDS);
+            sessionTimer.setMinutes(LONG_SESSION_MINUTES);
         }
         else
         {
-            sessionTimer.setSeconds(SHORT_SESSION_SECONDS);
+            sessionTimer.setMinutes(SHORT_SESSION_MINUTES);
         }
     }
 }
@@ -93,9 +101,7 @@ void Controller::buzzerOnToggled()
     {
         if(switches->buzzerOn)
         {
-        }
-        else
-        {
+            buzzer->start();
         }
     }
 }
@@ -107,5 +113,10 @@ void Controller::sessionEnded()
         effects->pulse();
         effects->start();
         sessionTimer.stop();
+        
+        if(switches->buzzerOn)
+        {
+            buzzer->start();
+        }
     }
 }

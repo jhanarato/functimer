@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "indicators.h"
 #include "switches.h"
+#include "buzzer.h"
 #include "timer.h"
 #include "effects_manager.h"
 
@@ -29,6 +30,7 @@ class Controller
     // Hardware
     SwitchPanel* switches;
     IndicatorPanel* indicators;
+    Buzzer* buzzer;
     
     // Light effects.
     EffectsManager* effects;

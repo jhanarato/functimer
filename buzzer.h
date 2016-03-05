@@ -19,13 +19,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef BUZZER_H
 #define BUZZER_H
 
+#include "timer.h"
+
 // Buzzer class:
-// A simple wrapper for the piezo-buzzer code. 
+// Was simple, but now uses timer to avoid calls to delay(). 
 class Buzzer
 {
-    int time;
+    Timer buzzerTimer;
+    
 public:
     Buzzer();
-    void buzz();
+    
+    void start();
+    void update();
 };
 #endif

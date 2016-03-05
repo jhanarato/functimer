@@ -23,13 +23,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Buzzer::Buzzer()
 {
-    time = 50; // Audible and brief.
     pinMode(alarmBuzzerPin, OUTPUT);
+    
+    buzzerTimer.setMilliseconds(50); // Audible and brief.
 }
 
-void Buzzer::buzz()
+void Buzzer::start()
 {
+    buzzerTimer.start();
     digitalWrite(alarmBuzzerPin, HIGH);
-    delay(time);
-    digitalWrite(alarmBuzzerPin, LOW);
+}
+
+void Buzzer::update()
+{
+    buzzerTimer.update();
+    
+    if(buzzerTimer.isComplete())
+    {
+        digitalWrite(alarmBuzzerPin, LOW);
+        buzzerTimer.stop();
+    }
 }
