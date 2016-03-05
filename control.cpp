@@ -69,15 +69,3 @@ void Controller::update()
     
     effects->update();
 }
-
-bool Controller::timerSwitchedOn()
-{
-    // The state of the timer-on switch has not changed.
-    if(!switches->timerOnHasChanged) return false;
-    
-    // The state of the timer-on switch is off.
-    if(!switches->timerOn) return false;
-    
-    // The timer has been switched from off to on.
-    return true;
-}
