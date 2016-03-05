@@ -35,10 +35,18 @@ void Controller::start()
 }
 
 void Controller::update()
-{  
-    // On/Off switch toggled?
+{     
     switches->update();
+    sessionTimer.update();
     
+    onOffToggled();
+    sessionEnded();
+    
+    effects->update();
+}
+
+void Controller::onOffToggled()
+{
     if(switches->timerOnHasChanged)
     {
         if(switches->timerOn)
@@ -56,16 +64,14 @@ void Controller::update()
             sessionTimer.stop();
         }
     }
-    
-    // Time is up?
-    sessionTimer.update();
-    
+}
+
+void Controller::sessionEnded()
+{
     if(sessionTimer.isComplete())
     {
         effects->pulse();
         effects->start();
         sessionTimer.stop();
     }
-    
-    effects->update();
 }

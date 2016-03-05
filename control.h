@@ -37,6 +37,10 @@ class Controller
     // heap allocation, but ran into a compiler bug.
     Timer sessionTimer;
     
+    // Check for events.
+    void onOffToggled();
+    void sessionEnded();
+    
 public:
     Controller();
     void start();    
