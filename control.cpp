@@ -18,6 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "control.h"
 
+const int LONG_SESSION_SECONDS = 10;
+const int SHORT_SESSION_SECONDS = 5;
+
 Controller::Controller()
 {
     switches = new SwitchPanel();
@@ -27,11 +30,12 @@ Controller::Controller()
 }
 
 void Controller::start()
-{
-    sessionTimer.setSeconds(3);
-    
+{    
     effects->switchIndicator();
     effects->start();
+    
+    sessionTimer.setSeconds(SHORT_SESSION_SECONDS);
+    sessionTimer.stop();
 }
 
 void Controller::update()
@@ -40,6 +44,7 @@ void Controller::update()
     sessionTimer.update();
     
     onOffToggled();
+    longShortToggled();
     sessionEnded();
     
     effects->update();
@@ -62,6 +67,21 @@ void Controller::onOffToggled()
             effects->start();
             
             sessionTimer.stop();
+        }
+    }
+}
+
+void Controller::longShortToggled()
+{
+    if(switches->timeLongHasChanged)
+    {
+        if(switches->timeLong)
+        {
+            sessionTimer.setSeconds(LONG_SESSION_SECONDS);
+        }
+        else
+        {
+            sessionTimer.setSeconds(SHORT_SESSION_SECONDS);
         }
     }
 }
