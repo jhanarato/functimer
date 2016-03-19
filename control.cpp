@@ -20,8 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "control.h"
 
 // Debug settings.
-const int LONG_SESSION_SECONDS = 10;
-const int SHORT_SESSION_SECONDS = 5;
+const int LONG_SESSION_SECONDS = 20;
+const int SHORT_SESSION_SECONDS = 10;
 
 const int LONG_SESSION_MINUTES = 2;
 const int SHORT_SESSION_MINUTES = 1;
@@ -37,10 +37,13 @@ Controller::Controller()
 
 void Controller::start()
 {    
+    switches->start();
+    
     effects->switchIndicator();
     effects->start();
 
     sessionTimer.setMinutes(SHORT_SESSION_MINUTES);
+    // sessionTimer.setSeconds(SHORT_SESSION_SECONDS);
     
     sessionTimer.stop();
 }
@@ -87,10 +90,12 @@ void Controller::longShortToggled()
         if(switches->timeLong)
         {
             sessionTimer.setMinutes(LONG_SESSION_MINUTES);
+            // sessionTimer.setSeconds(LONG_SESSION_SECONDS);
         }
         else
         {
             sessionTimer.setMinutes(SHORT_SESSION_MINUTES);
+            // sessionTimer.setSeconds(SHORT_SESSION_SECONDS);              
         }
     }
 }
