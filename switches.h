@@ -37,6 +37,8 @@ public:
     // immediately.
     SwitchPanel();
     
+    void start();
+    
     // Check the position of the three switches and check
     // whether anything has changed.
     void update();

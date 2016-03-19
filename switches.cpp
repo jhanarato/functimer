@@ -36,6 +36,10 @@ SwitchPanel::SwitchPanel()
     debounceTimer.start();
 }
 
+void SwitchPanel::start()
+{
+}
+
 void SwitchPanel::update()
 {    
     debounceTimer.update();
