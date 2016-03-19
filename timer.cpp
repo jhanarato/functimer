@@ -27,17 +27,17 @@ Timer::Timer()
     mode = STOPPED;
 }
 
-void Timer::setMilliseconds(int milliseconds)
+void Timer::setMilliseconds(long milliseconds)
 {
     this->duration = milliseconds;
 }
 
-void Timer::setSeconds(int seconds)
+void Timer::setSeconds(long seconds)
 {
     this->duration = seconds * 1000;
 }
 
-void Timer::setMinutes(int minutes)
+void Timer::setMinutes(long minutes)
 {
     this->duration = minutes * 60 * 1000;
 }
@@ -68,7 +68,7 @@ void Timer::update()
 {
     if(mode == STARTED)
     {
-        int now = millis();
+        long now = millis();
         
         if(now >= startTime + duration)
         {

@@ -32,10 +32,10 @@ class Timer
 {
     // The time in millis when the timer begun. Set to zero
     // unless mode is STARTED.
-    int startTime;
+    long startTime;
     
     // The time we are waiting in millis.
-    int duration;
+    long duration;
     
     // The current mode of the timer. Using an enum type
     // to manage a state machine.
@@ -48,13 +48,13 @@ public:
     // Set the time in millis between the 
     // start and finish of the timer. This can be called
     // at any time after object instatiation.
-    void setMilliseconds(int milliseconds);
+    void setMilliseconds(long milliseconds);
     
     // As per setMilliseconds() but duration is in seconds.
-    void setSeconds(int seconds);
+    void setSeconds(long seconds);
     
     // As per setMilliseconds() but duration is in minutes.
-    void setMinutes(int minutes);
+    void setMinutes(long minutes);
     
     // Returns true if the timer has started
     // but is not complete.
