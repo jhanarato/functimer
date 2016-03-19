@@ -23,8 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 const int LONG_SESSION_SECONDS = 20;
 const int SHORT_SESSION_SECONDS = 10;
 
-const int LONG_SESSION_MINUTES = 2;
-const int SHORT_SESSION_MINUTES = 1;
+// Operational settings.
+const int LONG_SESSION_MINUTES = 90;
+const int SHORT_SESSION_MINUTES = 60;
 
 Controller::Controller()
 {
