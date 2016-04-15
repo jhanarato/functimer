@@ -47,12 +47,7 @@ void SwitchPanel::update()
     {    
         bool newTimerOn    = digitalRead(timerOnTogglePin)    == HIGH;
         bool newTimeLong = digitalRead(timeIsLongTogglePin) == HIGH;
-        
-        // HACK: Since my buzzer toggle switch has died, the 
-        // buzzer is always turned on.
-        
-        // bool newBuzzerOn   = digitalRead(buzzerOnTogglePin)   == HIGH;
-        bool newBuzzerOn = true;
+        bool newBuzzerOn   = digitalRead(buzzerOnTogglePin)   == HIGH;
     
         timerOnHasChanged =  timerOn != newTimerOn;
         timeLongHasChanged = timeLong != newTimeLong;
